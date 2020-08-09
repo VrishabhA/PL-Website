@@ -7,6 +7,8 @@ let express         = require("express"),
     app.use(bodyParser.urlencoded({extended: true}));
     app.set("view engine", "ejs");
 
+mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true });
+
 
 app.get("/playlists",function(req,res){
 	res.render("playlists");
