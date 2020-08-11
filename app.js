@@ -5,6 +5,7 @@ let express         = require("express"),
     // methodOverride  = require("method-override"),
     app = express();
 
+    app.use(express.static(__dirname + "/public")); 
     app.use(bodyParser.urlencoded({extended: true}));
     app.set("view engine", "ejs");
 
@@ -12,7 +13,23 @@ mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true 
 
 
 app.get("/playlists",function(req,res){
-	res.render("playlists");
+	Playlist.find({}, function(err, playlists){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("playlists",{playlists: playlists});
+		}
+	})
+});
+
+app.get("/playlists/:id/", function(req,res){
+	Playlist.findById(req.params.id, function(err,playlist){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("show",{playlist: playlist});
+		}
+	})
 });
 
 // var newPL = new Playlist({

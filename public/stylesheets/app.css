@@ -1,0 +1,19 @@
+#indexThumbnail{        
+    width : 100%;
+    height: 90%;
+    overflow: auto;
+    padding : 0;
+}
+
+#indexThumbnail img{
+    width: 100%;
+    height: 50%;
+}
+
+.thumbnail img{
+	width :100%;
+}
+
+.thumbnail{
+	padding: 0;
+}
