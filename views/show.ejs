@@ -3,3 +3,7 @@
 <img src = "<%= playlist.image %>">
 <a href="<%= playlist.URL %>">playlist URL</a>
 <p><iframe src="<%= playlist.eUrl %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p> 
+
+<form id="deleteForm" action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+		<button class ="btn btn-xs btn-danger">Delete</button>
+</form>

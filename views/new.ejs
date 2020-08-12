@@ -1,0 +1,17 @@
+<head>
+	<link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href = "/stylesheets/app.css">
+</head>
+
+<h1 style= "text-align: center">New Playlist</h1>
+
+<form action="/playlists" method="POST">
+	<input class="form-control" type ="text" name="name" placeholder="Name">
+	<input class="form-control" type ="text" name="description" placeholder="Description">
+	<input class="form-control" type ="text" name="image" placeholder="Album Art">
+	<input class="form-control" type ="text" name="URL" placeholder="URL">
+	<input class="form-control" type ="text" name="eUrl" placeholder="Embeded URL">
+	<button>Submit</button>
+</form>
+
+<a href="/Playlists">Go Back</a>
