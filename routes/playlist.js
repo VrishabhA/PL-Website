@@ -1,9 +1,9 @@
 let express = require("express"),
     router = express.Router(),
-    playlists= require("../models/playlist");
+    Playlist= require("../models/playlist");
     
 
-router.get("/playlists",function(req,res){
+router.get("/",function(req,res){
 	Playlist.find({}, function(err, playlists){
 		if(err){
 			console.log(err);
@@ -13,7 +13,11 @@ router.get("/playlists",function(req,res){
 	})
 });
 
-router.get("/playlists/:id/", function(req,res){
+router.get("/new",function(req,res){
+	res.render("playlist/new");
+});
+
+router.get("/:id", function(req,res){
 	Playlist.findById(req.params.id, function(err,playlist){
 		if(err){
 			console.log(err);
@@ -24,12 +28,7 @@ router.get("/playlists/:id/", function(req,res){
 });
 
 
-//New 
-router.get("/newpl",function(req,res){
-	res.render("playlist/new");
-});
-
-router.post("/playlists",function(req,res){
+router.post("/",function(req,res){
 	var name = req.body.name;
 	var image = req.body.image;
 	var description = req.body.description;
@@ -57,7 +56,7 @@ router.post("/playlists",function(req,res){
 
 //Edit
 
-router.get("/playlists/:id/edit", function(req,res){
+router.get("/:id/edit", function(req,res){
 	Playlist.findById(req.params.id, function(err, playlist){
 		if(err){
 			console.log(err);
@@ -67,7 +66,7 @@ router.get("/playlists/:id/edit", function(req,res){
 	});
 });
 
-router.put("/playlists/:id",function(req,res){
+router.put("/:id",function(req,res){
     Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
 	    if(err){
 	        console.log(err);
@@ -77,7 +76,7 @@ router.put("/playlists/:id",function(req,res){
 	});
 });
 
-router.delete("/playlists/:id", function(req,res){
+router.delete("/:id", function(req,res){
 	Playlist.findOneAndDelete({_id: req.params.id}).exec(function(err,deletedPlaylist){
 		if(err){
 			console.log(err);
