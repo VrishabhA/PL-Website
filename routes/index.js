@@ -22,7 +22,7 @@ router.post("/register",function(req,res){
             console.log(err);
             res.render("register");
         }
-        passport.authenticate("local"),(function(req,res){
+        passport.authenticate("local")(req,res,function(){
             res.redirect("/playlists");
         });
     });

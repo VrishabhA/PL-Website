@@ -85,21 +85,22 @@ router.delete("/:id", function(req,res){
 		}
 	})
 });
-// var newPL = new Playlist({
-// 	name: "FAYAH",
-// 	image: "https://www.melodynest.com/wp-content/uploads/2019/06/SPACE-BLANK_chs060619-607x607.png",
-// 	description: "Hip-Hop.",
-// 	URL: "https://open.spotify.com/playlist/2dYqoEgm8p6kUnZZKwjtpl?si=2bBqExudQAyS0FnYec8Hvg",
-// 	eUrl: "https://open.spotify.com/embed/playlist/2dYqoEgm8p6kUnZZKwjtpl?si=2bBqExudQAyS0FnYec8Hvg"
-// });
 
-// Playlist.create(newPL, function(err, PL){
-// 	if(err){
-// 		console.log(err);
-// 	}
-// 	else{
-// 		console.log(PL);
-// 	}
-// });
+/*var newPL = new Playlist({
+	name: "FAYAH",
+	image: "https://www.melodynest.com/wp-content/uploads/2019/06/SPACE-BLANK_chs060619-607x607.png",
+	description: "Hip-Hop.",
+	URL: "https://open.spotify.com/playlist/2dYqoEgm8p6kUnZZKwjtpl?si=2bBqExudQAyS0FnYec8Hvg",
+	eUrl: "https://open.spotify.com/embed/playlist/2dYqoEgm8p6kUnZZKwjtpl?si=2bBqExudQAyS0FnYec8Hvg"
+});
+
+Playlist.create(newPL, function(err, PL){
+	if(err){
+		console.log(err);
+	}
+	else{
+		console.log(PL);
+	}
+});*/
 
 module.exports = router;
