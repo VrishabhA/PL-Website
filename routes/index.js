@@ -12,7 +12,7 @@ router.get("/", function(req,res){
 
 // Auth Routes
 router.get("/register",function(req,res){
-	res.render("register",{message: false});
+	res.render("register");
 });
 
 router.post("/register",function(req,res){
