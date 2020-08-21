@@ -34,7 +34,9 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 	var image = req.body.image;
 	var description = req.body.description;
 	var URL = req.body.URL;
-	var eUrl = req.body.eUrl;
+	var eUrl = embed(URL);
+	console.log(eUrl);
+
 
 	var newPL = new Playlist({
 		name 		: name,
@@ -86,6 +88,21 @@ router.delete("/:id", function(req,res){
 		}
 	})
 });
+
+function embed(url){
+	var emUrl ="";
+
+	for(var i = 0; i < url.length; i++){
+		
+		emUrl = emUrl  + url.charAt(i);
+
+		if(emUrl=="https://open.spotify.com"){
+			emUrl = emUrl+"/embed";
+		}
+	}
+
+	return emUrl;
+}
 
 /*var newPL = new Playlist({
 	name: "FAYAH",

@@ -7,7 +7,14 @@ var playlistSchema = new mongoose.Schema({
 	image: String, 
 	description: String,
 	URL: String,
-	eUrl: String
+	eUrl: String,
+	author : {
+    	id:{
+    		type: mongoose.Schema.Types.ObjectId,
+    		ref: "User"
+    	},
+    	username:String
+    }
 });
 
 module.exports = mongoose.model("Playlist", playlistSchema);
