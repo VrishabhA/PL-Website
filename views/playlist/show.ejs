@@ -1,3 +1,5 @@
+<%- include("../partials/header") %>
+
 <h4><%= playlist.name %></h4>
 <p><%= playlist.description %></p>
 <img src = "<%= playlist.image %>">
@@ -7,3 +9,5 @@
 <form id="deleteForm" action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
 		<button class ="btn btn-xs btn-danger">Delete</button>
 </form>
+
+<%- include("../partials/footer") %>
