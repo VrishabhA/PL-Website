@@ -39,16 +39,6 @@ app.use(function(req,res,next){
 });
 
 
-/*
-1. Implement passport js with "is logged in" in middleware
-	-Make User schema.
-
-2. Write middleware to make sure no 2 usernames match.
-
-3. Write middleware to give certain accounts admin priveleges.
-*/
-
-
 mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true , useUnifiedTopology:true});
 
 app.use("/", authRoutes);

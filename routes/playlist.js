@@ -35,7 +35,6 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 	var description = req.body.description;
 	var URL = req.body.URL;
 	var eUrl = embed(URL);
-	console.log(eUrl);
 
 
 	var newPL = new Playlist({
@@ -59,7 +58,7 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 
 //Edit
 
-router.get("/:id/edit", function(req,res){
+router.get("/:id/edit",middleware.checkPlaylistOwner, function(req,res){
 	Playlist.findById(req.params.id, function(err, playlist){
 		if(err){
 			console.log(err);
@@ -69,7 +68,7 @@ router.get("/:id/edit", function(req,res){
 	});
 });
 
-router.put("/:id",function(req,res){
+router.put("/:id",middleware.checkPlaylistOwner,function(req,res){
     Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
 	    if(err){
 	        console.log(err);
@@ -79,7 +78,7 @@ router.put("/:id",function(req,res){
 	});
 });
 
-router.delete("/:id", function(req,res){
+router.delete("/:id",middleware.checkPlaylistOwner, function(req,res){
 	Playlist.findOneAndDelete({_id: req.params.id}).exec(function(err,deletedPlaylist){
 		if(err){
 			console.log(err);
