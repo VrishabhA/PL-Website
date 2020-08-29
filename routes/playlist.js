@@ -42,7 +42,11 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 		image	   	: image,
 		description	: description,
 		URL 		: URL,
-		eUrl		: eUrl
+		eUrl		: eUrl,
+		author: {
+            id : req.user._id,
+            username: req.user.username  
+        } 
 	});
 
 	Playlist.create(newPL, function(err, PL){
