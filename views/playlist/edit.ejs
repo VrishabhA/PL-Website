@@ -1,15 +1,17 @@
 <%- include("../partials/header") %>
 
-<h1 style= "text-align: center">Edit Playlist</h1>
+<div class="container">
+	<h1 style= "text-align: center">Edit Playlist</h1>
 
-<form action="/playlists/<%= playlist._id %>/?_method=PUT" method="POST">
-	<input class="form-control" type ="text" name="playlist[name]" value="<%= playlist.name %>">
-	<input class="form-control" type ="text" name="playlist[description]" value="<%= playlist.description %>">
-	<input class="form-control" type ="text" name="playlist[image]" value="<%= playlist.image %>">
-	<input class="form-control" type ="text" name="playlist[URL]" value="<%= playlist.URL %>">
-	<button>Submit</button>
-</form>
+	<form action="/playlists/<%= playlist._id %>/?_method=PUT" method="POST">
+		<input class="form-control" type ="text" name="playlist[name]" value="<%= playlist.name %>">
+		<input class="form-control" type ="text" name="playlist[description]" value="<%= playlist.description %>">
+		<input class="form-control" type ="text" name="playlist[image]" value="<%= playlist.image %>">
+		<input class="form-control" type ="text" name="playlist[URL]" value="<%= playlist.URL %>">
+		<button>Submit</button>
+	</form>
 
 <a href="/Playlists">Go Back</a>
+</div>
 
 <%- include("../partials/footer") %>

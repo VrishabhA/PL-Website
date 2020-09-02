@@ -23,7 +23,7 @@ middlewareObj.checkPlaylistOwner = function(req,res,next){
 	    });
 	}
 	else{
-	    req.flash("error", "You need to Log in first!");
+	    req.flash("warning", "You need to Log in first!");
 		res.redirect("/login");
 	}
 }
@@ -33,7 +33,7 @@ middlewareObj.isLoggedIn = function(req,res,next){
 	if(req.isAuthenticated()){
 		next();
 	}else{
-		req.flash("error", "You need to Log in first!");
+		req.flash("warning", "You need to Log in first!");
 		res.redirect("/login");	
 	}
 	

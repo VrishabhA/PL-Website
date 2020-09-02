@@ -17,3 +17,12 @@
 .thumbnail{
 	padding: 0;
 }
+
+.navbar-nav > li{
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.btn-warning{
+	margin-right: 20px;
+}

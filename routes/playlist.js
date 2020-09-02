@@ -7,7 +7,7 @@ let express = require("express"),
 router.get("/",function(req,res){
 	Playlist.find({}, function(err, playlists){
 		if(err){
-			console.log(err);
+			req.flash("error",err);
 		}else{
 			res.render("playlist/playlists",{playlists: playlists});
 		}
@@ -21,7 +21,7 @@ router.get("/new",middleware.isLoggedIn,function(req,res){
 router.get("/:id", function(req,res){
 	Playlist.findById(req.params.id, function(err,playlist){
 		if(err){
-			console.log(err);
+			req.flash("error",err);
 		}else{
 			res.render("playlist/show",{playlist: playlist});
 		}
@@ -51,10 +51,10 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 
 	Playlist.create(newPL, function(err, PL){
 		if (err) {
-			console.log(err)
+			req.flash("error",err);
 		}else{
 
-			console.log("Playlist Added!");
+			req.flash("success", "Playlist Added!");
 			res.redirect("/playlists");
 		}
 	});
@@ -65,7 +65,7 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 router.get("/:id/edit",middleware.checkPlaylistOwner, function(req,res){
 	Playlist.findById(req.params.id, function(err, playlist){
 		if(err){
-			console.log(err);
+			req.flash("error",err);
 		}else{
 			res.render("playlist/edit",{playlist: playlist});
 		}
@@ -75,8 +75,9 @@ router.get("/:id/edit",middleware.checkPlaylistOwner, function(req,res){
 router.put("/:id",middleware.checkPlaylistOwner,function(req,res){
     Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
 	    if(err){
-	        console.log(err);
+	        req.flash("error",err);
 	    } else{
+	    	req.flash("success","Edited Playlist!");
 	        res.redirect("/playlists/"+req.params.id);
 	    }
 	});
@@ -85,8 +86,9 @@ router.put("/:id",middleware.checkPlaylistOwner,function(req,res){
 router.delete("/:id",middleware.checkPlaylistOwner, function(req,res){
 	Playlist.findOneAndDelete({_id: req.params.id}).exec(function(err,deletedPlaylist){
 		if(err){
-			console.log(err);
+			req.flash("error",err);
 		}else{
+			req.flash("success", "Deleted Playlist!");
 			res.redirect("/playlists");
 		}
 	})
@@ -117,7 +119,7 @@ function embed(url){
 
 Playlist.create(newPL, function(err, PL){
 	if(err){
-		console.log(err);
+		req.flash("error",err);
 	}
 	else{
 		console.log(PL);

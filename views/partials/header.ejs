@@ -7,28 +7,49 @@
 </head>
 <body>
 
-	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!-- <div class="container-fluid"> -->
-                <div class="navbar-header">
-                    <a class = "navbar-brand" href="/playlists">Playlists</a>
-                </div>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    				<span class="navbar-toggler-icon"></span>
-  				</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="navbar-header">
+                <a class = "navbar-brand" href="/playlists">Playlists</a>
+            </div>
 
-                <div class ="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class = "nav navbar-nav">
-                        <% if(!currentUser){ %>	
-                            <li><a href ="/login">Log In</a></li>
-                            <li><a href ="/register">Sign Up</a></li>
-                        <% } else { %>
-                            <li><a href=""><%= currentUser.username %></a></li>
-                            <li><a href ="/logout">Logout</a></li>
-                        <% } %>
-                    </ul>
-                </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+    			</button>
 
-            <!-- </div> -->
-      </nav> 
-	<%= message %>
+            <div class ="collapse navbar-collapse" id="navContent">
+                <ul class = "nav navbar-nav ml-auto">
+                    <% if(!currentUser){ %>	
+                        <li><a href ="/login">Log In</a></li>
+                        <li><a href ="/register">Sign Up</a></li>
+                    <% } else { %>
+                        <li><a href=""><%= currentUser.username %></a></li>
+                        <li><a href ="/logout">Logout</a></li>
+                    <% } %>
+                </ul>
+            </div>
+            
+        </div>
+    </nav> 
+	<div class="container">
+        <% if(success && success.length > 0) { %>
+            <div class="alert alert-success" role="alert">	
+        		<%= success %>
+        	</div>
+        <% } %>
+
+        <% if(error && error.length > 0) { %>
+        	<div class="alert alert-danger" role="alert">
+          		<%= error %>	
+        	</div>
+        <% } %>
+
+        <% if(warning && warning.length > 0) { %>
+        	<div class="alert alert-warning" role="alert">
+          		<%= warning %>	
+        	</div>
+        <% } %>
+
+    </div>
+	
