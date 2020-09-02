@@ -1,15 +1,18 @@
 <%- include("../partials/header") %>
 
-<h1 style= "text-align: center">New Playlist</h1>
+<div class="container">
+	<h1 style= "text-align: center">New Playlist</h1>
 
-<form action="/playlists" method="POST">
-	<input class="form-control" type ="text" name="name" placeholder="Name">
-	<input class="form-control" type ="text" name="description" placeholder="Description">
-	<input class="form-control" type ="text" name="image" placeholder="Album Art">
-	<input class="form-control" type ="text" name="URL" placeholder="URL">
-	<button>Submit</button>
-</form>
+	<form action="/playlists" method="POST">
+		<input class="form-control" type ="text" name="name" placeholder="Name">
+		<input class="form-control" type ="text" name="description" placeholder="Description">
+		<input class="form-control" type ="text" name="image" placeholder="Album Art">
+		<input class="form-control" type ="text" name="URL" placeholder="URL">
+		<button>Submit</button>
+	</form>
 
-<a href="/Playlists">Go Back</a>
+	<a href="/Playlists">Go Back</a>	
+</div>
+
 
 <%- include("../partials/footer") %>

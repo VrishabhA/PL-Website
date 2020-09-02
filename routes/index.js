@@ -20,9 +20,10 @@ router.post("/register",function(req,res){
     User.register(newUser, req.body.password,function(err,user){
         if(err){
             req.flash("error",err.message);
-            res.render("register",{message: req.flash("error")});
+            res.render("register",{error: req.flash("error")});
         }
         passport.authenticate("local")(req,res,function(){
+            req.flash("success","Welcome "+user.username);
             res.redirect("/playlists");
         });
     });
@@ -35,13 +36,14 @@ router.get("/login", function(req, res){
 router.post("/login", passport.authenticate("local",{
     successRedirect:"/playlists",
     failureRedirect: "/login",
-}), function(req,res,next){
-
+    failureFlash: true,
+    successFlash: 'Welcome back!'
+}), function(req,user,info){
 });
 
 router.get("/logout", function(req, res){
     req.logout();
-    req.flash("error","Logged Out!");
+    req.flash("success","Logged Out!");
     res.redirect("/");
 });
 
