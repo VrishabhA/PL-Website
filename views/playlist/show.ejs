@@ -1,23 +1,36 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-	<div class="row">	
-		<% if(currentUser && playlist.author.id.equals(currentUser._id)){ %>
-			
-			<a class="btn btn-xs btn-warning" href="/playlists/<%= playlist._id %>/edit">Edit</a>
-
-			<form id="deleteForm" action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
-					<button class ="btn btn-xs btn-danger">Delete</button>
-			</form>
-		<% }; %>
-	</div>
 	
-	<h4><%= playlist.name %></h4>
-	<p>Submitted By <%= playlist.author.username %></p>
-	<p><%= playlist.description %></p>
-	<img src = "<%= playlist.image %>">
-	<a href="<%= playlist.URL %>">playlist URL</a>
-	<p><iframe src="<%= playlist.eUrl %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p> 
+	<div class="row pt-5">
+		<div class="col-sm-6">
+
+			<div class="row mb-2">	
+				<% if(currentUser && playlist.author.id.equals(currentUser._id)){ %>
+					
+					<a class="btn btn-xs btn-warning mr-2 ml-3" href="/playlists/<%= playlist._id %>/edit">Edit</a>
+
+					<form id="deleteForm" action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+							<button class ="btn btn-xs btn-danger">Delete</button>
+					</form>
+				<% }; %>
+			</div>
+
+			<div class="card">
+				<img class ="card-img-top" src = "<%= playlist.image %>">
+				<h4 class="card-title"><%= playlist.name %></h4>
+				<h6 class="card-subtitletext-muted">Submitted By <%= playlist.author.username %></h6>
+				<p class="card-text"><%= playlist.description %></p>
+				<a href="<%= playlist.URL %>" class="btn btn-primary">Play Now</a>
+			</div>
+
+		</div>
+
+		<div class="col-sm-6">
+			<p><iframe src="<%= playlist.eUrl %>" width="800" height="1000" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p> 
+		</div>
+	</div>
+			
 </div>
 
 
