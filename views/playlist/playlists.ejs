@@ -4,18 +4,22 @@
         <h1 class="display-4">Spotify Playlists</h1>
         <hr class="my-3">
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/playlists/new" role="button">Subimt Playlist!</a>
+            <a class="btn btn-primary btn-lg" href="/playlists/new" role="button">Subimt Your Playlist!</a>
         </p>
     </div>
     <div class ="row text-center" style="display:flex; flex-wrap:wrap">
         <% playlists.forEach(function(playlist){ %>
             <div class ="col-md-3 col-sm-6 mb-4">
                 <div class ="thumbnail" id="indexThumbnail">
-                    <img src = "<%= playlist.image %>">
+                    <div class="thumbAnimation green">
+                        <a href="/playlists/<%= playlist._id %>">
+                            <img src = "<%= playlist.image %>">
+                            <i class="fa fa-play"></i>
+                        </a>
+                    </div>
                     <div class= "caption">
                         <h4><%=  playlist.name  %></h4>
                     </div>
-                    <a href="/playlists/<%= playlist._id %>" class="btn btn-primary">More Info</a>
                 </div>
             </div>
         <% }); %>

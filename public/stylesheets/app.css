@@ -24,3 +24,52 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+
+/*.thumbAnimation{
+
+}*/
+
+div.thumbAnimation.green {
+  background-color: #1d1d1b;
+}
+
+
+div.thumbAnimation {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 100%;
+  background: #000000;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+div.thumbAnimation i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  font-size: 34px;
+  color: #000000;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  background: #ffffff;
+}
+
+div.thumbAnimation:hover img{
+  opacity: 0.3;
+  filter: grayscale(100%)
+}
+
+div.thumbAnimation * {
+  transition: all 0.5s ease-in-out;
+}
+
+div.thumbAnimation i{
+  transform: translate(-50%, -50%) scale(0);
+}
+
+div.thumbAnimation:hover i{
+  transform: translate(-50%, -50%) scale(1)
+}
