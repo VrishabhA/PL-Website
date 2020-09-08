@@ -4,12 +4,15 @@
 	<h1 style= "text-align: center">Edit Playlist</h1>
 
 	<form action="/playlists/<%= playlist._id %>/?_method=PUT" method="POST">
-		<input class="form-control" type ="text" name="playlist[name]" value="<%= playlist.name %>">
-		<input class="form-control" type ="text" name="playlist[description]" value="<%= playlist.description %>">
-		<input class="form-control" type ="text" name="playlist[image]" value="<%= playlist.image %>">
-		<input class="form-control" type ="text" name="playlist[URL]" value="<%= playlist.URL %>">
+		<input class="form-control" type ="text" name="playlist[name]" placeholder="Name*" value="<%= playlist.name %>" required>
+		<input class="form-control" type ="text" name="playlist[description]" placeholder="Description*" value="<%= playlist.description %>" required>
+		<input class="form-control" type ="text" name="playlist[image]" placeholder="Album Art" value="<%= playlist.image %>">
+		<input class="form-control" type ="text" name="playlist[URL]" placeholder="URL*" value="<%= playlist.URL %>" required>
 		<button>Submit</button>
 	</form>
+
+
+
 
 <a href="/Playlists">Go Back</a>
 </div>

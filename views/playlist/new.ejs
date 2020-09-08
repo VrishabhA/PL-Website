@@ -5,20 +5,21 @@
 
 	<form action="/playlists" method="POST">
 		<% if(!flag){ %>
-			<input class="form-control" type ="text" name="name" placeholder="Name" value="<%= name %>" required>
-			<input class="form-control" type ="text" name="description" placeholder="Description" value="<%= description %>" required>
+			<input class="form-control" type ="text" name="name" placeholder="Name*" value="<%= name %>" required>
+			<input class="form-control" type ="text" name="description" placeholder="Description*" value="<%= description %>" required>
 			<input class="form-control" type ="text" name="image" placeholder="Album Art" value="<%= image %>">
-			<input class="form-control" type ="text" name="URL" placeholder="URL" value="<%= URL %>" required>
+			<input class="form-control" type ="text" name="URL" placeholder="URL*" value="<%= URL %>" required>
 			<button>Submit</button>
 		<% }else{ %>
-			<input class="form-control" type ="text" name="name" placeholder="Name" required>
-			<input class="form-control" type ="text" name="description" placeholder="Description"  required>
+			<input class="form-control" type ="text" name="name" placeholder="Name*" required>
+			<input class="form-control" type ="text" name="description" placeholder="Description*"  required>
 			<input class="form-control" type ="text" name="image" placeholder="Album Art">
-			<input class="form-control" type ="text" name="URL" placeholder="URL" required>
+			<input class="form-control" type ="text" name="URL" placeholder="URL*" required>
 			<button>Submit</button>
 		<% } %>
-
 	</form>
+
+	<p>fields marked * are mandatory</p>
 
 	<a href="/Playlists">Go Back</a>	
 </div>

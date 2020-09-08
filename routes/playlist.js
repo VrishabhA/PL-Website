@@ -88,14 +88,29 @@ router.get("/:id/edit",middleware.checkPlaylistOwner, function(req,res){
 });
 
 router.put("/:id",middleware.checkPlaylistOwner,function(req,res){
-    Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
-	    if(err){
-	        req.flash("error",err);
-	    } else{
-	    	req.flash("success","Edited Playlist!");
-	        res.redirect("/playlists/"+req.params.id);
-	    }
-	});
+	var url = req.body.playlist.URL;
+
+	if(checkURL(url)){
+	    Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
+		    if(err){
+		        req.flash("error",err);
+		    } else{
+		    	req.flash("success","Edited Playlist!");
+		        res.redirect("/playlists/"+req.params.id);
+		    }
+		});
+	}
+	else{
+		req.flash("error","Invalid URL!");
+		Playlist.findById(req.params.id, function(err, playlist){
+		if(err){
+			req.flash("error",err);
+		}else{
+			res.render("playlist/edit",{error:req.flash("error"), playlist: playlist});
+		}
+		});
+	}
+
 });
 
 router.delete("/:id",middleware.checkPlaylistOwner, function(req,res){
