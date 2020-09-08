@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="card">
-				<img class ="card-img-top" src = "<%= playlist.image %>">
+				<img class ="card-img-top" src = "<%= playlist.image %>" onerror="this.onerror=null;this.src='https://image.freepik.com/free-icon/black-simple-music-note-vector_318-10095.jpg';">
 				<h4 class="card-title"><%= playlist.name %></h4>
 				<h6 class="card-subtitletext-muted">Submitted By <%= playlist.author.username %></h6>
 				<p class="card-text"><%= playlist.description %></p>

@@ -11,9 +11,9 @@
         <% playlists.forEach(function(playlist){ %>
             <div class ="col-md-3 col-sm-6 mb-4">
                 <div class ="thumbnail" id="indexThumbnail">
-                    <div class="thumbAnimation green">
+                    <div class="thumbAnimation back">
                         <a href="/playlists/<%= playlist._id %>">
-                            <img src = "<%= playlist.image %>">
+                            <img src = "<%= playlist.image %>" onerror="this.onerror=null;this.src='https://image.freepik.com/free-icon/black-simple-music-note-vector_318-10095.jpg';">
                             <i class="fa fa-play"></i>
                         </a>
                     </div>
