@@ -30,7 +30,31 @@
 			<p><iframe src="<%= playlist.eUrl %>" width="800" height="1000" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p> 
 		</div>
 	</div>
-			
+
+	<div class ="well">
+		<div class="text-right">
+			<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Click here to write a comment!</a>
+		</div>
+		<hr>
+		<% playlist.comments.forEach(function(comment){ %>
+		<div class = "row">
+			<div class ="col-md-12">
+				<strong><%= comment.author.username %></strong> 
+				<span class="pull-right">10 days ago</span>
+				<p>	
+					<span><%= comment.text %></span> 
+				</p>
+				<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+						
+					<a class="btn btn-xs btn-warning" href="/playlists/<%= playlist._id %>/comments/<%= comment._id %>/edit">Edit</a>
+						<form class="deleteForm" action="/playlists/<%= playlist._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" >
+							<input type="submit" class="btn btn-xs btn-danger" value="Delete">
+						</form>
+				<% }; %>
+			</div>
+		</div>
+		<% }); %>
+	</div>
 </div>
 
 

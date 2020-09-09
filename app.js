@@ -7,11 +7,13 @@ let express         = require("express"),
     methodOverride  = require("method-override"),
     User 			= require("./models/user"),
     Playlist 		= require("./models/playlist"),
+    Comment			= require("./models/comment"),
     app = express();
 
-
-let playlistRoutes = require("./routes/playlist"),
+let commentRoutes  = require("./routes/comments"),
+	playlistRoutes = require("./routes/playlist"),
 	authRoutes	   = require("./routes/index");
+
 
 app.use(express.static(__dirname + "/public")); 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -45,6 +47,7 @@ mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true 
 
 app.use("/", authRoutes);
 app.use("/playlists", playlistRoutes);
+app.use("/playlists/:id/comments",commentRoutes);
 
 app.listen(3000, function(){
 	console.log("The Server has started!");
