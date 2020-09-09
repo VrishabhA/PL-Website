@@ -21,7 +21,7 @@
             <div class ="collapse navbar-collapse" id="navContent">
                 <ul class = "nav navbar-nav ml-auto">
                     <% if(!currentUser){ %>	
-                        <li><a href ="/login">Log In</a></li>
+                        <li><a class="fa" href ="/login">Log In</a></li>
                         <li><a href ="/register">Sign Up</a></li>
                     <% } else { %>
                         <li><a href=""><%= currentUser.username %></a></li>

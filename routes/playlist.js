@@ -15,7 +15,7 @@ router.get("/",function(req,res){
 });
 
 router.get("/new",middleware.isLoggedIn,function(req,res){
-	res.render("playlist/new");
+	res.render("playlist/new",{flag : true});
 });
 
 router.get("/:id", function(req,res){
@@ -49,15 +49,30 @@ router.post("/",middleware.isLoggedIn,function(req,res){
         } 
 	});
 
-	Playlist.create(newPL, function(err, PL){
-		if (err) {
-			req.flash("error",err);
-		}else{
+	if(checkURL(URL)){
+		Playlist.create(newPL, function(err, PL){
+			if (err) {
+				req.flash("error",err);
+			}else{
 
-			req.flash("success", "Playlist Added!");
-			res.redirect("/playlists");
-		}
-	});
+				req.flash("success", "Playlist Added!");
+				res.redirect("/playlists");
+			}
+		});
+	}
+	else{
+		req.flash("error","Invalid URL!");
+		res.render("playlist/new",{
+			error       : req.flash("error"),
+			flag        : false,
+			name 		: name,
+			image	   	: image,
+			description	: description,
+			URL 		: URL,
+			eUrl		: eUrl,
+		});
+	}
+
 });
 
 //Edit
@@ -73,14 +88,29 @@ router.get("/:id/edit",middleware.checkPlaylistOwner, function(req,res){
 });
 
 router.put("/:id",middleware.checkPlaylistOwner,function(req,res){
-    Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
-	    if(err){
-	        req.flash("error",err);
-	    } else{
-	    	req.flash("success","Edited Playlist!");
-	        res.redirect("/playlists/"+req.params.id);
-	    }
-	});
+	var url = req.body.playlist.URL;
+
+	if(checkURL(url)){
+	    Playlist.findOneAndUpdate({_id: req.params.id}, req.body.playlist, {useFindAndModify: false}).exec(function(err,updatedPlaylist){
+		    if(err){
+		        req.flash("error",err);
+		    } else{
+		    	req.flash("success","Edited Playlist!");
+		        res.redirect("/playlists/"+req.params.id);
+		    }
+		});
+	}
+	else{
+		req.flash("error","Invalid URL!");
+		Playlist.findById(req.params.id, function(err, playlist){
+		if(err){
+			req.flash("error",err);
+		}else{
+			res.render("playlist/edit",{error:req.flash("error"), playlist: playlist});
+		}
+		});
+	}
+
 });
 
 router.delete("/:id",middleware.checkPlaylistOwner, function(req,res){
@@ -107,6 +137,24 @@ function embed(url){
 	}
 
 	return emUrl;
+}
+
+function checkURL(url){
+
+	var check ="";
+	
+	for(var i = 0; i < url.length; i++){
+
+		check = check + url.charAt(i);
+
+		if(check == "https://open.spotify.com/playlist/"|| check == "open.spotify.com/playlist/"){
+			if(check == "open.spotify.com/playlist/")
+				url = "https://"+ check;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /*var newPL = new Playlist({
