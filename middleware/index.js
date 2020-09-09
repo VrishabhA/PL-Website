@@ -1,4 +1,5 @@
-let Playlist = require("../models/playlist");
+let Playlist = require("../models/playlist"),
+	Comment = require("../models/comment");
 
 middlewareObj = {}
 
