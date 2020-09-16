@@ -1,7 +1,7 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-	
+		
 	<div class="row pt-5">
 		<div class="col-sm-6">
 
@@ -19,41 +19,56 @@
 			<div class="card">
 				<img class ="card-img-top" src = "<%= playlist.image %>" onerror="this.onerror=null;this.src='https://image.freepik.com/free-icon/black-simple-music-note-vector_318-10095.jpg';">
 				<h4 class="card-title"><%= playlist.name %></h4>
-				<h6 class="card-subtitletext-muted">Submitted By <%= playlist.author.username %></h6>
+				<h6 class="card-subtitletext-muted">Submitted By <%= playlist.author.username %>, <%= moment(playlist.createdAt).fromNow() %></h6>
 				<p class="card-text"><%= playlist.description %></p>
 				<a href="<%= playlist.URL %>" class="btn btn-primary"><i class="fa fa-play-circle-o fa-lg"></i> Play Now</a>
 			</div>
 
 		</div>
 
-		<div class="col-sm-6 pt-2">
-			<p><iframe src="<%= playlist.eUrl %>" width="800" height="1000" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p> 
+		<div class="col col-sm-6 pt-2">
+			<p><iframe src="<%= playlist.eUrl %>" width= "100%" height="685" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p> 
 		</div>
+
 	</div>
 
-	<div class ="well">
-		<div class="text-right">
-			<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Click here to write a comment!</a>
-		</div>
-		<hr>
-		<% playlist.comments.forEach(function(comment){ %>
-		<div class = "row">
-			<div class ="col-md-12">
-				<strong><%= comment.author.username %></strong> 
-				<span class="pull-right">10 days ago</span>
-				<p>	
-					<span><%= comment.text %></span> 
-				</p>
-				<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-						
-					<a class="btn btn-xs btn-warning" href="/playlists/<%= playlist._id %>/comments/<%= comment._id %>/edit">Edit</a>
-						<form class="deleteForm" action="/playlists/<%= playlist._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" >
-							<input type="submit" class="btn btn-xs btn-danger" value="Delete">
-						</form>
-				<% }; %>
+
+
+
+	<div class ="card">
+		<div class="card-header"><h4>Comments: </h4></div>
+
+		<% if(playlist.comments){ %>
+			<div class="text-center pt-2">
+				<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Click here to comment!</a>
 			</div>
-		</div>
-		<% }); %>
+			
+			<% playlist.comments.forEach(function(comment){ %>
+			<div class = "list-group list-group-flush">
+				<div class ="list-group-item">
+					<strong><%= comment.author.username %></strong> 
+					<span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+					<p>	
+						<span><%= comment.text %></span> 
+					</p>
+					<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+						<div class="row">
+							<a title="Edit" class="btn btn-xs btn-warning mr-1" href="/playlists/<%= playlist._id %>/comments/<%= comment._id %>/edit"><i class="fa fa-scissors fa-lg"></i></a>
+							
+							<form title="Delete" class="deleteForm" action="/playlists/<%= playlist._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" >
+								<button class="btn btn-xs btn-danger"><i class="fa fa-trash-o fa-lg"></i></button>
+							</form>
+						</div>	
+					<% }; %>
+				</div>
+			</div>
+			<% }); %>
+		<%	} else{ %>
+			<div class="text-muted"><h6>No comments yet</h6></div>
+			<div class="text-center pt-2">
+				<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Be the First!</a>
+			</div>
+		<% } %>
 	</div>
 </div>
 
