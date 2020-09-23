@@ -28,17 +28,12 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                 }else{
                     
                     comment.author.username = req.user.username;
-                    console.log(comment.author.username);
-                    console.log(req.user.username);
                     comment.author.id = req.user._id;
                     comment.save();
 
                     playlist.comments.push(newComment);
                     playlist.save();
                     res.redirect("/playlists/"+playlist.id);
-                    // console.log(playlist);
-                    // console.log(req.body);
-                    // console.log(req.body.comment);
                 }
             });
         }

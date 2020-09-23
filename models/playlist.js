@@ -8,6 +8,7 @@ var playlistSchema = new mongoose.Schema({
 	description: String,
 	URL: String,
 	eUrl: String,
+	createdAt: {type: Date, default: Date.now },
 	author : {
     	id:{
     		type: mongoose.Schema.Types.ObjectId,

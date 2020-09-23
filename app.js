@@ -10,6 +10,8 @@ let express         = require("express"),
     Comment			= require("./models/comment"),
     app = express();
 
+    app.locals.moment = require('moment');
+
 let commentRoutes  = require("./routes/comments"),
 	playlistRoutes = require("./routes/playlist"),
 	authRoutes	   = require("./routes/index");
@@ -32,7 +34,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
