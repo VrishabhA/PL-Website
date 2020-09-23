@@ -38,9 +38,14 @@
 	<div class ="card">
 		<div class="card-header"><h4>Comments: </h4></div>
 
-		<% if(playlist.comments){ %>
+		<% if(Object.keys(playlist.comments).length == 0){ %>
 			<div class="text-center pt-2">
-				<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Click here to comment!</a>
+				<div class="text-muted"><h6>No comments yet</h6></div>
+				<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Be the First!</a>
+			</div>
+		<%	} else{ %>
+			<div class="text-center pt-2">
+				<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Click here to Comment!</a>
 			</div>
 			
 			<% playlist.comments.forEach(function(comment){ %>
@@ -63,11 +68,6 @@
 				</div>
 			</div>
 			<% }); %>
-		<%	} else{ %>
-			<div class="text-muted"><h6>No comments yet</h6></div>
-			<div class="text-center pt-2">
-				<a class = "btn btn-success"  href="/playlists/<%= playlist._id %>/comments/new"> Be the First!</a>
-			</div>
 		<% } %>
 	</div>
 </div>
