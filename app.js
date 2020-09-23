@@ -44,12 +44,22 @@ app.use(function(req,res,next){
 });
 
 
-mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true , useUnifiedTopology:true});
+// mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true , useUnifiedTopology:true});
+
+mongoose.connect("mongodb+srv://user:fakepass@cluster0.v1ybo.mongodb.net/<dbname>?retryWrites=true&w=majority",{
+    useNewUrlParser:true,
+    useCreateIndex:true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Connectecd to DB!");
+}).catch(err =>{
+    console.log("error", err.message);
+});
 
 app.use("/", authRoutes);
 app.use("/playlists", playlistRoutes);
 app.use("/playlists/:id/comments",commentRoutes);
 
-app.listen(3000, function(){
+app.listen(process.env.PORT, process.env.IP , function(){
 	console.log("The Server has started!");
 });
