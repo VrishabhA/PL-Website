@@ -7,7 +7,7 @@ let express     = require("express"),
 router.get("/new", middleware.isLoggedIn, function(req, res){
     Playlist.findById(req.params.id,function(err, playlist){
         if(err){
-            console.log(err);
+            req.flash("error",err);
         }
         else{
             res.render("comments/new",{playlist: playlist});
@@ -20,11 +20,11 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var newComment = new Comment({ text: req.body.text, author: req.user.username });
     Playlist.findById(req.params.id,function(err, playlist){
         if(err){
-            console.log(err);
+            req.flash("error",err);
         }else{
             Comment.create(newComment,function(err, comment){
                 if(err){
-                    console.log(err);
+                    req.flash("error",err);
                 }else{
                     
                     comment.author.username = req.user.username;
@@ -43,7 +43,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 router.get("/:comment_id/edit", middleware.checkCommentOwner, function(req,res){
     Comment.findById(req.params.comment_id, function(err,comment){
         if(err){
-            console.log(err);
+            req.flash("error",err);
         }else{
             res.render("comments/edit",{comment: comment, playlist_id : req.params.id});
         }
