@@ -23,14 +23,6 @@ router.get("/:id", function(req,res){
 		if(err){
 			req.flash("error",err);
 		}else{
-
-			console.log(playlist)
-			/*var flag=1;
-			playlist.comments.count({}, function(error, num) {
-				if(num==0){
-					flag = 0;
-				}
-			});*/
 			res.render("playlist/show",{playlist: playlist});
 		}
 	})
