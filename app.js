@@ -10,6 +10,8 @@ let express         = require("express"),
     Comment			= require("./models/comment"),
     app = express();
 
+    require('dotenv').config();
+
     app.locals.moment = require('moment');
 
 let commentRoutes  = require("./routes/comments"),
@@ -46,7 +48,7 @@ app.use(function(req,res,next){
 
 // mongoose.connect("mongodb://localhost:27017/playlists", { useNewUrlParser: true , useUnifiedTopology:true});
 
-mongoose.connect("mongodb+srv://VrishabhA:samatron55v@cluster0.v1ybo.mongodb.net/<dbname>?retryWrites=true&w=majority",{
+mongoose.connect("mongodb+srv://VrishabhA:"+process.env.DB_PASS+"@cluster0.v1ybo.mongodb.net/<dbname>?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology: true
