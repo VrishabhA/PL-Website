@@ -7,23 +7,24 @@
             <a class="btn btn-primary btn-lg" href="/playlists/new" role="button">Subimt Your Playlist!</a>
         </p>
     </div>
-    <div class ="row text-center" style="display:flex; flex-wrap:wrap">
+    <div class ="row">
         <% playlists.forEach(function(playlist){ %>
-            <div class ="col-md-3 col-sm-6 mb-4">
-                <div class ="thumbnail" id="indexThumbnail">
-                    <div class="thumbAnimation back">
-                        <a href="/playlists/<%= playlist._id %>">
-                            <img src = "<%= playlist.image %>" onerror="this.onerror=null;this.src='https://image.freepik.com/free-icon/black-simple-music-note-vector_318-10095.jpg';">
-                            <i class="fa fa-play"></i>
-                        </a>
-                    </div>
-                    <div class= "caption">
-                        <h4><%=  playlist.name  %></h4>
+            <div class ="col-md-3 col-6 col-sm-6 mb-4" style="display:flex; flex-wrap: wrap;">
+                <div class="card-deck">
+                    <div class ="card text-center ">
+                        <div class="thumbAnimation back">
+                            <a href="/playlists/<%= playlist._id %>">
+                                <img class ="card-img thumbScale" src = "<%= playlist.image %>" onerror="this.onerror=null;this.src='https://image.freepik.com/free-icon/black-simple-music-note-vector_318-10095.jpg';">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                        <h4 class="card-title"><%=  playlist.name  %></h4>
                     </div>
                 </div>
             </div>
         <% }); %>
     </div>
+
 </div>
 
 <%- include("../partials/footer") %>

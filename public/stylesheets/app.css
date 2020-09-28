@@ -1,6 +1,6 @@
 @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
-#indexThumbnail{        
+/*#indexThumbnail{        
     width : 100%;
     height: auto;
     overflow: auto;
@@ -9,9 +9,9 @@
 
 #indexThumbnail img{
     width: 100%;
-    min-height: 255px;
+    /*min-height: 255px;*/
 }
-
+*/
 /*.thumbnail img{
 	width :100%;
 }
@@ -28,6 +28,12 @@
 /*.thumbAnimation{
 
 }*/
+
+.thumbScale {
+    width: 100%;
+    height: 255px;
+    object-fit: cover;
+}
 
 div.thumbAnimation.back {
   background-color: #1d1d1b;
