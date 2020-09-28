@@ -1,33 +1,10 @@
 @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
-/*#indexThumbnail{        
-    width : 100%;
-    height: auto;
-    overflow: auto;
-    padding : 0;
-}
-
-#indexThumbnail img{
-    width: 100%;
-    /*min-height: 255px;*/
-}
-*/
-/*.thumbnail img{
-	width :100%;
-}
-
-.thumbnail{
-	padding: 0;
-}*/
 
 .navbar-nav > li{
   padding-left: 10px;
   padding-right: 10px;
 }
-
-/*.thumbAnimation{
-
-}*/
 
 .thumbScale {
     width: 100%;
