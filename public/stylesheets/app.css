@@ -6,11 +6,23 @@
   padding-right: 10px;
 }
 
-.thumbScale {
+@include media-breakpoint-up(sm) {
+  .thumbScale {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ }
+
+@include media-breakpoint-up(md) {
+  .thumbScale {
     width: 100%;
     height: 255px;
     object-fit: cover;
+  }
 }
+
+
 
 div.thumbAnimation.back {
   background-color: #1d1d1b;
