@@ -81,7 +81,7 @@ router.get("/callback", function (req, res) {
             password: client_secret
         }
     }).then(response => {
-        console.log(response)
+        // console.log(response)
 
         const accessToken = response.data.access_token,
             refreshToken = response.data.refresh_token,
@@ -105,8 +105,8 @@ router.get("/callback", function (req, res) {
                 token.account.username = req.user.username;
                 token.save();
 
-                console.log("--------------------------------------------------------------------------------");
-                console.log("Token Created: " + token);
+                // console.log("--------------------------------------------------------------------------------");
+                // console.log("Token Created: " + token);
             }
         });
 
@@ -176,7 +176,6 @@ router.get('/display', function (req, res) {
                 console.log(err);
             });
         }
-
     });
 
 

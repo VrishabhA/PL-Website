@@ -1,6 +1,10 @@
+const e = require("express");
+
 let express = require("express"),
 	router = express.Router(),
+	axios = require("axios"),
 	Playlist = require("../models/playlist"),
+	Spotify = require("../models/spotify"),
 	middleware = require("../middleware");
 
 
@@ -30,50 +34,91 @@ router.get("/:id", function (req, res) {
 
 
 router.post("/", middleware.isLoggedIn, function (req, res) {
+
 	var name = req.body.name;
-	var image = req.body.image;
+	// var image = req.body.image;
 	var description = req.body.description;
 	var URL = req.body.URL;
-	var eUrl = embed(URL);
+	var image = "";
+
+	var eUrl = embed(URL),
+		playlist_id = getID(URL),
+		url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images';
 
 
-	var newPL = new Playlist({
-		name: name,
-		image: image,
-		description: description,
-		URL: URL,
-		eUrl: eUrl,
-		author: {
-			id: req.user._id,
-			username: req.user.username
+	Spotify.find({ 'account.id': req.user._id }, function (err, spotify) {
+		if (err) {
+			req.flash("error", err);
+		} else {
+			console.log(spotify)
+			spotify.forEach((data) => {
+				accessToken = data.token.accessToken;
+			});
+			axios({
+				url: url,
+				method: 'get',
+				params: {
+					limit: 5
+				},
+				headers: {
+					Authorization: 'Bearer ' + accessToken
+				}
+			}).then(response => {
+
+				response.data.map(data => {
+					image = data.url
+				});
+
+				var newPL = new Playlist({
+					name: name,
+					image: image,
+					description: description,
+					URL: URL,
+					eUrl: eUrl,
+					playlist_id: playlist_id,
+					author: {
+						id: req.user._id,
+						username: req.user.username
+					}
+				});
+
+				if (checkURL(URL)) {
+					Playlist.create(newPL, function (err, PL) {
+						if (err) {
+							req.flash("error", err);
+						} else {
+
+							req.flash("success", "Playlist Added!");
+							res.redirect("/playlists");
+						}
+					});
+				}
+
+				else {
+					req.flash("error", "Invalid URL!");
+					res.render("playlist/new", {
+						error: req.flash("error"),
+						flag: false,
+						name: name,
+						image: image,
+						description: description,
+						URL: URL,
+						eUrl: eUrl,
+						playlist_id: playlist_id
+					});
+				}
+			}).catch(err => {
+				console.log(err);
+			});
+
 		}
+
+
 	});
-
-	if (checkURL(URL)) {
-		Playlist.create(newPL, function (err, PL) {
-			if (err) {
-				req.flash("error", err);
-			} else {
-
-				req.flash("success", "Playlist Added!");
-				res.redirect("/playlists");
-			}
-		});
-	}
-	else {
-		req.flash("error", "Invalid URL!");
-		res.render("playlist/new", {
-			error: req.flash("error"),
-			flag: false,
-			name: name,
-			image: image,
-			description: description,
-			URL: URL,
-			eUrl: eUrl,
-		});
-	}
-
 });
+
+
+
 
 //Edit
 
@@ -150,12 +195,33 @@ function checkURL(url) {
 
 		if (check == "https://open.spotify.com/playlist/" || check == "open.spotify.com/playlist/") {
 			if (check == "open.spotify.com/playlist/")
-				url = "https://" + check;
+				url = "https://" + check;                       //-----Maybe UPDATE ?
 			return true;
 		}
 	}
 
 	return false;
+}
+
+function getID(url) {
+	var id = "";
+	var check = "";
+
+
+	for (var i = 0; i < url.length; i++) {
+
+
+
+		if (check == "https://open.spotify.com/playlist/" || check == "open.spotify.com/playlist/") {
+			if (url.charAt(i) !== "?") {
+				id = id + url.charAt(i);
+			} else {
+				return id;
+			}
+		} else {
+			check = check + url.charAt(i);
+		}
+	}
 }
 
 /*var newPL = new Playlist({
